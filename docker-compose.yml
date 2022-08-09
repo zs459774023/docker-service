@@ -1,0 +1,18 @@
+version: "2.4"
+
+networks:
+  service-net:
+    external: true
+
+services:
+  etcd:
+    image: quay.io/coreos/etcd:v3.5.4
+    container_name: etcd
+    restart: always
+    networks:
+      - service-net
+    environment:
+      - ETCD_NAME=etcd
+      - ETCD_DATA_DIR=/var/lib/etcd
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
+      - ETCD_ADVERTISE_CLIENT_URLS=http://0.0.0.0:2379
