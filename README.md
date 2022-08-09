@@ -13,3 +13,4 @@ docker network create service-net
 - nginx
 - mysql
 - redis
+- clickhouse

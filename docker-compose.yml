@@ -71,3 +71,21 @@ services:
       TZ: "Asia/Shanghai"
     networks:
       - service-net
+
+  clickhouse:
+    image: yandex/clickhouse-server:20.8.17.25
+    container_name: clickhouse
+    hostname: clickhouse
+    ports:
+      - 8123:8123
+      - 9000:9000
+    expose:
+      - 9000
+      - 9009
+    volumes:
+      - ./clickhouse/conf:/etc/clickhouse-server/
+      - ./clickhouse/logs:/var/log/clickhouse-server/
+    environment:
+      TZ: "Asia/Shanghai"
+    networks:
+      - service-net   
