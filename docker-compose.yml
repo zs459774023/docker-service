@@ -36,7 +36,23 @@ services:
       - ./nginx/fastcgi_params:/etc/nginx/fastcgi_params:ro
       - ./nginx/log:/var/log/nginx/:rw
     environment:
-      TZ: "$TZ"
+      TZ: "Asia/Shanghai"
     restart: always
     networks:
       - service-net
+
+
+  mysql:
+    image: mysql:8.0.13
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
+      - ./mysql/data:/var/lib/mysql/:rw
+    restart: always
+    networks:
+      - service-net
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      TZ: "$TZ"

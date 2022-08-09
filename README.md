@@ -7,3 +7,8 @@
 ```shell
 docker network create service-net
 ```
+
+### 已支持列表
+- etcd
+- nginx
+- mysql
