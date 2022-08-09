@@ -55,4 +55,19 @@ services:
       - service-net
     environment:
       MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
-      TZ: "$TZ"
+      TZ: "Asia/Shanghai"
+  
+  redis:
+    image: redis:5.0.3-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/redis.conf:/etc/redis.conf:ro
+      - ./redis/data:/data/:rw
+    restart: always
+    entrypoint: ["redis-server", "/etc/redis.conf"]
+    environment:
+      TZ: "Asia/Shanghai"
+    networks:
+      - service-net
