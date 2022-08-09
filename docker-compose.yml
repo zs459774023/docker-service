@@ -16,3 +16,27 @@ services:
       - ETCD_DATA_DIR=/var/lib/etcd
       - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
       - ETCD_ADVERTISE_CLIENT_URLS=http://0.0.0.0:2379
+
+  nginx:
+    build:
+      context: ./nginx
+      args:
+        NGINX_VERSION: nginx:1.19.1-alpine
+        CONTAINER_PACKAGE_URL: mirrors.ustc.edu.cn
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./data:/www/:rw
+      - ./nginx/ssl:/ssl:rw
+      - ./nginx/conf.d:/etc/nginx/conf.d/:rw
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/fastcgi-php.conf:/etc/nginx/fastcgi-php.conf:ro
+      - ./nginx/fastcgi_params:/etc/nginx/fastcgi_params:ro
+      - ./nginx/log:/var/log/nginx/:rw
+    environment:
+      TZ: "$TZ"
+    restart: always
+    networks:
+      - service-net
