@@ -12,3 +12,4 @@ docker network create service-net
 - etcd
 - nginx
 - mysql
+- redis
