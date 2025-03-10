@@ -21,7 +21,7 @@ services:
     build:
       context: ./nginx
       args:
-        NGINX_VERSION: nginx:1.19.1-alpine
+        NGINX_VERSION: nginx:latest
         CONTAINER_PACKAGE_URL: mirrors.ustc.edu.cn
     container_name: nginx
     ports:
